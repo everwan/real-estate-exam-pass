@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "publishedAt": "2026-05-04T22:03:27.531Z",
+  "releaseRules": {
+    "checkIntervalHours": 12,
+    "maxParallelDownloads": 1,
+    "fallbackToBuiltinOnFailure": true
+  },
+  "bundles": [
+    {
+      "id": "question-bank-ca",
+      "type": "question-bank",
+      "targetCode": "CA",
+      "updatePolicy": {
+        "mode": "recommended",
+        "wifiOnly": false,
+        "retryable": true,
+        "forceReloadAfterApply": true
+      },
+      "version": "2026.05.04.1503",
+      "url": "https://raw.githubusercontent.com/everwan/real-estate-exam-pass/main/appdata/question-bank-ca.enc",
+      "sha256": "a9dfd79a83336ad6f1f57c6648f2e47f860f447c685c9631926afb3b3c7dea75",
+      "sourceHash": "03d8f6b04c96f37c4b53daef693c2f9a202c204c12087567a207aff44f4849d3"
+    },
+    {
+      "id": "question-bank-ny",
+      "type": "question-bank",
+      "targetCode": "NY",
+      "updatePolicy": {
+        "mode": "recommended",
+        "wifiOnly": false,
+        "retryable": true,
+        "forceReloadAfterApply": true
+      },
+      "version": "2026.05.04.1503",
+      "url": "https://raw.githubusercontent.com/everwan/real-estate-exam-pass/main/appdata/question-bank-ny.enc",
+      "sha256": "63f7b46ed398902e66ca63d1aa719a21bf16130252e3009959094f3e71f6c6f8",
+      "sourceHash": "e9287a2de0dd9b3df4c7bcc0d456b645f831068dfcc0a2035a813cf51462bd72"
+    },
+    {
+      "id": "handbook-ca",
+      "type": "handbook",
+      "targetCode": "CA",
+      "updatePolicy": {
+        "mode": "recommended",
+        "wifiOnly": false,
+        "retryable": true,
+        "forceReloadAfterApply": true
+      },
+      "version": "2026.05.04.1503",
+      "url": "https://raw.githubusercontent.com/everwan/real-estate-exam-pass/main/appdata/handbook-ca.enc",
+      "sha256": "2ea181cf9940962e1062f3fc77d2542ba38ab1fcbf24270267e4fd415806e052",
+      "sourceHash": "82bd9221b513a46b7459543018088a536c24f18e121f407032058f6df1c33e8f"
+    },
+    {
+      "id": "handbook-ny",
+      "type": "handbook",
+      "targetCode": "NY",
+      "updatePolicy": {
+        "mode": "recommended",
+        "wifiOnly": false,
+        "retryable": true,
+        "forceReloadAfterApply": true
+      },
+      "version": "2026.05.04.1503",
+      "url": "https://raw.githubusercontent.com/everwan/real-estate-exam-pass/main/appdata/handbook-ny.enc",
+      "sha256": "e0c5d87ecf0e023a1a7e85778929bd57e1d002357f67381e37ed5c95d1a30a11",
+      "sourceHash": "083cf185da5f961570cc7c1cbe45cd0048e75886f28531b21b4f0210c9dcd874"
+    }
+  ]
+}
