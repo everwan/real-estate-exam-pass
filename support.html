@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Real Estate Pass Support</title>
+  <style>
+    :root {
+      --bg-top: #eef6ff;
+      --bg-mid: #f7fbf8;
+      --bg-bottom: #fff8ea;
+      --surface: #ffffff;
+      --surface-soft: #f4f8fb;
+      --text: #142033;
+      --muted: #647084;
+      --border: rgba(20, 32, 51, 0.12);
+      --brand: #1b79fb;
+      --brand-dark: #1452ad;
+      --green: #087568;
+      --amber: #b7791f;
+      --shadow: 0 18px 50px rgba(20, 32, 51, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 48%, var(--bg-bottom) 100%);
+      color: var(--text);
+      font-family: "Avenir Next", "SF Pro Display", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+    }
+
+    main {
+      width: min(100% - 32px, 980px);
+      margin: 0 auto;
+      padding: 32px 0 64px;
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 680px;
+      margin-bottom: 16px;
+      font-size: 48px;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    p,
+    li {
+      font-size: 16px;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+    }
+
+    .title-block {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      margin-bottom: 16px;
+      padding: 7px 10px;
+      border: 1px solid rgba(8, 117, 104, 0.18);
+      border-radius: 8px;
+      background: rgba(8, 117, 104, 0.08);
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .page-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .page-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 7px 11px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--brand-dark);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .language-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 16px;
+      flex: 0 0 auto;
+      min-width: 290px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 12px 32px rgba(20, 32, 51, 0.08);
+    }
+
+    .language-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--brand), var(--green));
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .language-copy {
+      display: grid;
+      gap: 1px;
+      min-width: 86px;
+    }
+
+    .language-copy span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .language-copy strong {
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .select-shell {
+      position: relative;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .select-shell::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid var(--brand-dark);
+      border-bottom: 2px solid var(--brand-dark);
+      pointer-events: none;
+      transform: translateY(-68%) rotate(45deg);
+    }
+
+    .select-shell select {
+      width: 100%;
+      appearance: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface-soft);
+      color: var(--text);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.2;
+      padding: 12px 38px 12px 14px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .select-shell select:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(27, 121, 251, 0.14);
+    }
+
+    .language-section {
+      margin-top: 20px;
+      padding: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.74);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 14px 38px rgba(20, 32, 51, 0.07);
+    }
+
+    .language-section[hidden] {
+      display: none;
+    }
+
+    .summary {
+      margin-bottom: 28px;
+      padding: 18px 20px;
+      border: 1px solid rgba(183, 121, 31, 0.22);
+      border-radius: 8px;
+      background: rgba(183, 121, 31, 0.09);
+      color: #4f360d;
+      font-weight: 650;
+    }
+
+    section + section {
+      margin-top: 28px;
+    }
+
+    ul {
+      padding-left: 22px;
+      margin-bottom: 0;
+    }
+
+    li::marker {
+      color: var(--brand);
+    }
+
+    a {
+      color: var(--brand-dark);
+      font-weight: 800;
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    @media (max-width: 700px) {
+      main {
+        width: min(100% - 24px, 980px);
+        padding: 18px 0 38px;
+      }
+
+      .page-header {
+        display: block;
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .language-control {
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr);
+        position: static;
+        width: 100%;
+        min-width: 0;
+        margin-top: 22px;
+      }
+
+      .language-copy {
+        min-width: 0;
+        align-self: center;
+      }
+
+      .select-shell {
+        grid-column: 1 / -1;
+        width: 100%;
+      }
+
+      .language-section {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <div class="title-block">
+        <div class="eyebrow" data-i18n="eyebrow">Support</div>
+        <h1 data-i18n="heading">Real Estate Pass</h1>
+        <p class="muted" data-i18n="updated">Last updated: May 13, 2026</p>
+        <nav class="page-links" aria-label="Related pages">
+          <a href="privacy.html" data-i18n="privacyLink">Privacy Policy</a>
+        </nav>
+      </div>
+
+      <label class="language-control" for="language-select">
+        <span class="language-icon" aria-hidden="true">A</span>
+        <span class="language-copy">
+          <span data-i18n="languageLabel">Language</span>
+          <strong data-i18n="languageHint">Auto detected</strong>
+        </span>
+        <span class="select-shell">
+          <select id="language-select" aria-label="Language">
+            <option value="en">English</option>
+            <option value="zh">简体中文</option>
+          </select>
+        </span>
+      </label>
+    </header>
+
+    <article class="language-section" data-locale="en">
+      <p class="summary">If you run into issues while using Real Estate Pass, contact us by email. Including your device model, operating system version, app version, selected state exam track, and a screenshot will help us respond faster.</p>
+
+      <section>
+        <h2>How to get help</h2>
+        <p>If you have questions about app behavior, ads, privacy or tracking prompts, content updates, questions and explanations, mock exams, mistake review, saved questions, progress records, the eBook, glossary, or licensing guide content, please contact support by email.</p>
+      </section>
+
+      <section>
+        <h2>What to include</h2>
+        <ul>
+          <li>The screen or feature you were using</li>
+          <li>The selected state exam track, such as California or New York</li>
+          <li>What happened and what you expected to happen</li>
+          <li>Your device model and iOS or Android version</li>
+          <li>Your Real Estate Pass app version, if available</li>
+          <li>A screenshot or screen recording, if available</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Content questions</h2>
+        <p>If you believe a practice question, explanation, glossary term, eBook section, or guide step is unclear or incorrect, please include the topic, state track, question text if possible, and what you think should be corrected.</p>
+      </section>
+
+      <section>
+        <h2>Ads and privacy prompts</h2>
+        <p>The app may show ads and may display advertising consent or tracking permission prompts depending on your platform, region, and device settings. For privacy details, see the linked Privacy Policy.</p>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:app.support.us@gmail.com">app.support.us@gmail.com</a></p>
+      </section>
+
+      <section>
+        <h2>About the app</h2>
+        <p>Real Estate Pass is a bilingual English-Chinese study app for California and New York real estate salesperson exam preparation. It includes topic practice, mock exams, review tools, progress records, an eBook, glossary, and licensing guide content. It is a study aid and is not an official government, licensing board, or exam vendor app.</p>
+      </section>
+    </article>
+
+    <article class="language-section" data-locale="zh" hidden>
+      <p class="summary">如果你在使用美国房产考试通时遇到问题，可以通过电子邮件联系我们。来信时附上设备型号、系统版本、App 版本、所选州考试方向和截图，有助于我们更快定位问题。</p>
+
+      <section>
+        <h2>如何获得帮助</h2>
+        <p>如果你对应用功能、广告、隐私或追踪权限提示、内容更新、题目与解析、模拟考试、错题复习、收藏题、学习进度记录、电子书、术语表或执照申请指南有疑问，请通过电子邮件联系技术支持。</p>
+      </section>
+
+      <section>
+        <h2>来信建议附上</h2>
+        <ul>
+          <li>你当时所在的页面或使用的功能</li>
+          <li>你选择的州考试方向，例如加州或纽约州</li>
+          <li>实际发生了什么，以及你原本期望发生什么</li>
+          <li>你的设备型号和 iOS 或 Android 版本</li>
+          <li>美国房产考试通的 App 版本号，如果方便提供</li>
+          <li>相关截图或录屏，如果方便提供</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>内容问题</h2>
+        <p>如果你认为某道练习题、解析、术语、电子书章节或指南步骤不清楚或可能有误，请尽量附上题目所属主题、州考试方向、题目文字，以及你认为需要修正的地方。</p>
+      </section>
+
+      <section>
+        <h2>广告与隐私提示</h2>
+        <p>本应用可能展示广告，并可能根据你的平台、地区和设备设置展示广告同意或追踪权限提示。隐私相关细节请查看本页链接的隐私政策。</p>
+      </section>
+
+      <section>
+        <h2>联系方式</h2>
+        <p>邮箱：<a href="mailto:app.support.us@gmail.com">app.support.us@gmail.com</a></p>
+      </section>
+
+      <section>
+        <h2>关于应用</h2>
+        <p>美国房产考试通是一款面向加州和纽约州房地产销售员考试备考的中英双语学习应用，包含章节练习、模拟考试、复习工具、进度记录、电子书、术语表和执照申请指南等内容。本应用是学习辅助工具，并非官方政府机构、执照委员会或考试机构应用。</p>
+      </section>
+    </article>
+  </main>
+
+  <script>
+    const LOCALES = {
+      en: {
+        htmlLang: "en",
+        title: "Real Estate Pass Support",
+        eyebrow: "Support",
+        heading: "Real Estate Pass",
+        updated: "Last updated: May 13, 2026",
+        languageLabel: "Language",
+        languageHint: "Auto detected",
+        privacyLink: "Privacy Policy"
+      },
+      zh: {
+        htmlLang: "zh-Hans",
+        title: "美国房产考试通技术支持",
+        eyebrow: "技术支持",
+        heading: "美国房产考试通",
+        updated: "最后更新：2026年5月13日",
+        languageLabel: "语言",
+        languageHint: "自动匹配",
+        privacyLink: "隐私政策"
+      }
+    };
+
+    function matchLocale(language) {
+      const normalized = String(language || "").toLowerCase();
+
+      if (!normalized) return null;
+      if (normalized.startsWith("zh")) return "zh";
+      if (normalized.startsWith("en")) return "en";
+
+      return null;
+    }
+
+    function browserLocale() {
+      const languages = Array.isArray(navigator.languages) && navigator.languages.length
+        ? navigator.languages
+        : [navigator.language || navigator.userLanguage];
+
+      for (const language of languages) {
+        const matched = matchLocale(language);
+        if (matched) return matched;
+      }
+
+      return "en";
+    }
+
+    function applyLocale(locale) {
+      const nextLocale = LOCALES[locale] ? locale : "en";
+      const copy = LOCALES[nextLocale];
+
+      document.documentElement.lang = copy.htmlLang;
+      document.title = copy.title;
+      document.getElementById("language-select").value = nextLocale;
+
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        const key = node.dataset.i18n;
+        if (copy[key]) node.textContent = copy[key];
+      });
+
+      document.querySelectorAll("[data-locale]").forEach((section) => {
+        section.hidden = section.dataset.locale !== nextLocale;
+      });
+    }
+
+    const select = document.getElementById("language-select");
+    applyLocale(browserLocale());
+    select.addEventListener("change", (event) => applyLocale(event.target.value));
+  </script>
+</body>
+</html>
